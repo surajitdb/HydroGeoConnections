@@ -110,6 +110,13 @@ public abstract class Connections {
     }
 
     /**
+     * @brief Return the <tt>MAGNITUDE</tt> of the node
+     *
+     * @return
+     */
+    abstract public Key getMAGNITUDE();
+
+    /**
      * @brief Validate the states of the connection object
      */
     abstract protected void validateStates();

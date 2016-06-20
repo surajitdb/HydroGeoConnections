@@ -54,6 +54,7 @@ public final class BinaryConnections extends Connections {
     private final Key PARENT; //!< the key of the parent of the node
     private final Key LCHILD; //!< the key of the left child of the node
     private final Key RCHILD; //!< the key of the right child of the node
+    private final Key MAGNITUDE; //!< the key of the magnitude of the node
 
     /**
      * @brief Constructor
@@ -74,6 +75,7 @@ public final class BinaryConnections extends Connections {
         this.PARENT = connection.getPARENT();
         this.LCHILD = connection.getLCHILD();
         this.RCHILD = connection.getRCHILD();
+        this.MAGNITUDE = connection.getMAGNITUDE();
 
         validateStates(); // precondition
         validateInvariant(); // invariant
@@ -81,6 +83,8 @@ public final class BinaryConnections extends Connections {
     }
 
     /**
+     * @param ID
+     * @param MAGNITUDE
      * @brief Constructor
      *
      * @description Having just the <tt>ID</tt> of the node as input argument,
@@ -93,18 +97,23 @@ public final class BinaryConnections extends Connections {
      *              </ul>
      *              The PARENT key is computed as \f$PARENT = NODE / 2\f$. No
      *              invariant validation is required at the end of this object
-     *              construction
+     *              construction. Of courde the <tt>MAGNITUDE</tt> is the other
+     *              input parameter required
      *
      * @param[in] ID The <tt>Key</tt> of the node
+     * @param[in] MAGNITUDE The <tt>Key</tt> of the layer of the node in the
+     *            tree
      */
-    public BinaryConnections(final Key ID) {
+    public BinaryConnections(final Key ID, final Key MAGNITUDE) {
 
         validateKey(ID); // precondition
+        validateKey(MAGNITUDE); // precondition
 
         this.ID = ID;
         this.PARENT = new Key(Math.floor(ID.getDouble() / 2));
         this.LCHILD = new Key(ID.getDouble() * 2);
         this.RCHILD = new Key(LCHILD.getDouble() + 1);
+        this.MAGNITUDE = MAGNITUDE;
 
     }
 
@@ -112,19 +121,23 @@ public final class BinaryConnections extends Connections {
      * @brief Constructor
      *
      * @description This is the most complete constructor, which takes in input
-     *              ID, LCHILD and RCHILD. Only the PARENT key is computed. The
-     *              invariant is checked at the end of the construction.
+     *              ID, LCHILD, RCHILD and MAGNITUDE. Only the PARENT key is
+     *              computed. The invariant is checked at the end of the
+     *              construction.
      *
      * @param[in] ID The key of the node
      * @param[in] LCHILD The key of the left child of the node
      * @param[in] RCHILD The key of the right child of the node
+     * @param[in] MAGNITUDE The key of the layer of the node in the tree
      */
-    public BinaryConnections(final Key ID, final Key LCHILD, final Key RCHILD) {
+    public BinaryConnections(final Key ID, final Key LCHILD,
+                             final Key RCHILD, final Key MAGNITUDE) {
 
         this.ID = ID;
         this.PARENT = new Key(Math.floor(ID.getDouble() / 2));
         this.LCHILD = LCHILD;
         this.RCHILD = RCHILD;
+        this.MAGNITUDE = MAGNITUDE;
 
         validateStates(); // precondition
         validateInvariant(); // invariant
@@ -191,6 +204,14 @@ public final class BinaryConnections extends Connections {
     }
 
     /**
+     * @return The key of the magnitude of the node
+     */
+    @Override
+    public Key getMAGNITUDE() {
+        return MAGNITUDE;
+    }
+
+    /**
      * @return The complete description of the object with all its states
      */
     @Override
@@ -216,6 +237,7 @@ public final class BinaryConnections extends Connections {
     protected void validateStates() {
         validateKey(ID);
         validateKey(PARENT);
+        validateKey(MAGNITUDE);
         // validateKey(LCHILD); left child might be null
         // validateKey(RCHILD); right child might be null
     }
