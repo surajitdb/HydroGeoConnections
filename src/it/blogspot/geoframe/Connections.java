@@ -23,20 +23,23 @@ import java.util.List;
 import it.blogspot.geoframe.key.Key;
 
 /**
+ * @mainpage HydroGeoConnections
+ *
  * @brief Abstract class for the connection of the nodes
  *
- * @description This type of object has been introduced in order to manage the
- *              invariants as unique instance, as specified in @cite
- *              goetz2006:java p69.
- *              <p>
- *              This abstract class should work as guide for
- *              who wants to implement the connections between nodes of a tree.
- *              The methods <code>getNumberNonNullChildren()</code> and
- *              <code>getChildren()</code> must be implemented because are
- *              necessary to get the number of children of each node, in order
- *              to know when a node has all the input data to run its own
- *              simulation.
- *              </p>
+ * @section Description Description
+ *
+ *          This type of object has been introduced in order to manage the
+ *          invariants as unique instance, as specified in @cite goetz2006:java
+ *          p69.
+ *          <p>
+ *          This abstract class should work as guide for who wants to implement
+ *          the connections between nodes of a tree. The methods
+ *          <code>getNumberNonNullChildren()</code> and
+ *          <code>getChildren()</code> must be implemented because are necessary
+ *          to get the number of children of each node, in order to know when a
+ *          node has all the input data to run its own simulation.
+ *          </p>
  *
  * @author sidereus, francesco.serafin.3@gmail.com
  * @version 0.1
