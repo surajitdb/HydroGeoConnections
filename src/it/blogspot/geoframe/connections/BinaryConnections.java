@@ -218,6 +218,7 @@ public final class BinaryConnections extends Connections {
     public String toString() {
 
         String print = " ID = " + ID.getString();
+        print += " Magnitude = " + MAGNITUDE.getString();
         print += " Parent Key = " + PARENT.getString();
 
         if (LCHILD != null) print += " Left Child = " + LCHILD.getString();
